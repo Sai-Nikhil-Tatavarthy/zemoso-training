@@ -1,0 +1,65 @@
+.AppDiv{
+  box-sizing: border-box;
+
+/* Auto layout */
+
+display: flex;
+flex-direction: row;
+align-items: center;
+padding: 32px;
+gap: 12px;
+isolation: isolate;
+
+position: absolute;
+width: 340px;
+height: 259px;
+left: 278px;
+top: 143px;
+
+/* background/elevation 1 */
+
+background: #201F24;
+/* border/low emp */
+
+border: 1px solid #28272B;
+border-radius: 12px;
+}
+
+.IconDiv{
+  display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: flex-start;
+padding: 0px;
+gap: 24px;
+
+width: 276px;
+height: 168px;
+
+
+/* Inside auto layout */
+
+flex: none;
+order: 0;
+flex-grow: 1;
+z-index: 0;
+}
+
+.TypopDiv{
+  display: flex;
+flex-direction: column;
+align-items: flex-start;
+padding: 0px;
+gap: 8px;
+
+width: 164px;
+height: 64px;
+
+
+/* Inside auto layout */
+
+flex: none;
+order: 1;
+flex-grow: 0;
+font-family: 'Gilroy';
+}

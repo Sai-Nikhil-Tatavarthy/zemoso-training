@@ -1,0 +1,148 @@
+import React, { useEffect } from "react";
+// import "./style.css";
+import { Typography, Button } from "@mui/material";
+import RateSlider from "../../Atoms/Slider";
+import myTheme from "../../../Theme";
+import { ThemeProvider } from "@mui/material";
+import { ReactComponent as InfoCircle } from "../../../assets/Icons/info-circle.svg";
+import { submitBtnSx, resetBtnSx, useStyles } from "./Hooks";
+import { rows } from "../../../assets/Data/myData";
+import TextBox from "../../Atoms/TextBox";
+import styled from "@emotion/styled";
+
+interface Props {
+  selectedRows: number[];
+  ttlAmount: number;
+  rate: number;
+  onHandleSlider: (event: Event, value: number | number[]) => void;
+}
+
+const Summary = (props: Props) => {
+  const [value, setValue] = React.useState<number>(props.ttlAmount);
+
+  const maxValue = 570242.64;
+
+  const SummaryText = styled.div`
+    margin-right: 10px;
+  `;
+
+  const ReviewButton = styled.div`
+    margin-bottom: 20px;
+    color: myTheme.palette.info.main;
+  `;
+
+  const RateDiv = styled.div`
+    display: flex;
+    align-items: flex-end;
+  `;
+
+  const SummarySection = styled.div`
+    color: myTheme.palette.info.main;
+    width: 90%;
+    margin-bottom: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  `;
+
+  const styles = useStyles();
+
+  return (
+    <div className={styles.summary_div}>
+      <ThemeProvider theme={myTheme}>
+        <div className={styles.summary_heading}>
+          <SummaryText>
+            <TextBox variant="h2" text="Summary" />
+          </SummaryText>
+
+          <InfoCircle />
+        </div>
+
+        <div
+          className={`${styles.summary_content} ${styles.term_select} ${styles.flex_display}`}
+        >
+          <SummarySection>
+            <TextBox variant="body1" text="Term" />
+            <TextBox variant="body1" text="12 Months" />
+          </SummarySection>
+          <SummarySection>
+            {/* <Typography>Selected Contracts</Typography> */}
+            <TextBox variant="body1" text="Selected Contracts" />
+            <TextBox
+              variant="body1"
+              text={props.selectedRows.length.toString()}
+            />
+          </SummarySection>
+        </div>
+        <div className={`${styles.summary_content} ${styles.slider_section}`}>
+          <div className={styles.slide_reset}>
+            <SummarySection>
+              <TextBox variant="body1" text="Slide to autoselect" />
+              <Typography>
+                <Button
+                  variant="contained"
+                  className={styles.reset_btn}
+                  onClick={() => {
+                    setValue(0);
+                  }}
+                  sx={resetBtnSx}
+                >
+                  <TextBox variant="h5" text="reset" />
+                </Button>
+              </Typography>
+            </SummarySection>
+          </div>
+          <div className={styles.slider_div}>
+            <RateSlider
+              value={props.ttlAmount}
+              onHandleChange={props.onHandleSlider}
+              maxValue={maxValue}
+            />
+          </div>
+
+          <SummarySection>
+            <TextBox
+              variant="body1"
+              text={props.ttlAmount + " selected of " + maxValue}
+            />
+          </SummarySection>
+        </div>
+        <div
+          className={`${styles.summary_content} ${styles.payback_rate} ${styles.flex_display}`}
+        >
+          <SummarySection>
+            <TextBox variant="body1" text="Pay back amount" />
+            <TextBox variant="body1" text={"$" + props.ttlAmount} />
+          </SummarySection>
+          <SummarySection>
+            <TextBox variant="body1" text="Rate %" />
+            <RateDiv>
+              <TextBox variant="caption" text="(12.00)%" />
+              <TextBox variant="body1" text={" $" + props.rate} />
+            </RateDiv>
+          </SummarySection>
+        </div>
+
+        <div className={styles.seperation_line}></div>
+        <div className={`${styles.summary_content} ${styles.total_payable}`}>
+          <SummarySection>
+            <TextBox variant="body1" text="Total Payout" />
+            <Typography>${props.ttlAmount + props.rate}</Typography>
+          </SummarySection>
+        </div>
+        <ReviewButton>
+          <Button
+            variant="contained"
+            className={styles.review_btn}
+            size="small"
+            sx={submitBtnSx}
+          >
+            <TextBox variant="button" text="Review Your credit" />
+          </Button>
+        </ReviewButton>
+      </ThemeProvider>
+    </div>
+  );
+};
+
+export default Summary;
