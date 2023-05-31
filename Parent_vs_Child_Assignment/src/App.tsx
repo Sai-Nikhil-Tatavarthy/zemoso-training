@@ -14,15 +14,15 @@ function App() {
   const Date1:number = d.getDate()
   const s:string = "Due - "+Month+" "+Date1+", "+Year
   return (
-    <div className="AppDi">
-      {/* <div className='IconDiv'>
+    <div className="AppDiv">
+       <div className='IconDiv'>
         <Icon></Icon>
         <div className='TypoDiv'>
           <TypoIcon>{s}</TypoIcon>
           <Typography variant='h6' color='#E8E7F0'>$20,718.66</Typography>
         </div>
       </div>
-      <Tags due={d}></Tags> */}
+      <Tags due={d}></Tags>
       <FuntionalComponent />
     </div>
   );
