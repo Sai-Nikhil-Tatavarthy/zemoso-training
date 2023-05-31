@@ -1,0 +1,35 @@
+import React from "react";
+import "./style.css";
+import LeftNav from "../Organisms/LeftNav";
+import HeadText from "../Molecules/HeadText";
+import MidSection from "../Organisms/MidSection";
+import Summary from "../Molecules/Summary";
+const AppDashBoard = () => {
+  const [selectedRows, setSelectedRows] = React.useState<number[]>([]);
+
+  const handleSelectedRowsChange = (selected: number[]) => {
+    setSelectedRows(selected);
+  };
+  return (
+    <div className="Main_div">
+      <div className="left_div">
+        <LeftNav />
+      </div>
+      <div className="right_div">
+        <div className="right_upper_div">
+          <HeadText />
+        </div>
+        <div className="right_lower_div">
+          <div className="right_lower_start">
+            <MidSection onSelectedRowsChange={handleSelectedRowsChange} />
+          </div>
+          <div className="right_lower_end">
+            <Summary selectedRows={selectedRows} />
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default AppDashBoard;
